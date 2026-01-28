@@ -31,3 +31,14 @@ All pages share a common full-screen UI using `100vw` and `100vh`.
     <Route path="/about" element={<About />} />
   </Routes>
 </BrowserRouter>
+
+## Output Screenshots
+
+### Home Page
+![Home](./screenshots/home.png)
+
+### About Page
+![About](./screenshots/about.png)
+
+### Contact Page
+![Contact](./screenshots/contact.png)

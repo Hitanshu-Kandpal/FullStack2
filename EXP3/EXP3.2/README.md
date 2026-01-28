@@ -38,3 +38,10 @@ Navigation buttons are provided using `Link`:
 <Link to="/dashboard">
   <button>Go to Dashboard</button>
 </Link>
+## Output Screenshots
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+### Profile
+![Profile](./screenshots/profile.png)

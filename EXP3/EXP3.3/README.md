@@ -31,3 +31,10 @@ Routes used:
     <Route path="/profile" element={<Profile />} />
   </Routes>
 </BrowserRouter>
+## Output Screenshots
+
+### Dashboard UI
+![Dashboard](./screenshots/dashboard.png)
+
+### Profile UI
+![Profile](./screenshots/profile.png)
