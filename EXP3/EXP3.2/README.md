@@ -3,7 +3,7 @@
 
 ## 📘 `EXP_3_2_README.md`
 
-```md
+
 # Experiment 3.2 – Routing with Navigation
 
 ## Aim  
@@ -30,7 +30,7 @@ Routes used:
 
 Navigation buttons are provided using `Link`:
 
-```jsx
+
 <Link to="/profile">
   <button>Go to Profile</button>
 </Link>
