@@ -1,61 +1,69 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-function Dashboard() {
+const pageStyle = {
+  width: "100vw",
+  height: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  fontFamily: "Arial, sans-serif",
+  background: "linear-gradient(135deg, #141e30, #243b55)",
+  color: "white",
+  textAlign: "center",
+};
+
+const btnStyle = {
+  marginTop: "12px",
+  padding: "10px 18px",
+  borderRadius: "8px",
+  border: "none",
+  background: "rgba(255,255,255,0.15)",
+  color: "white",
+  cursor: "pointer",
+  fontSize: "16px",
+};
+
+function Profile() {
   return (
-    <div className="layout">
-      <div className="glass-card">
-        <h1>Dashboard</h1>
-        <p className="subtitle">Welcome back 👋</p>
-
-        <div className="stats">
-          <div className="stat-box">
-            <h3>Projects</h3>
-            <p>6</p>
-          </div>
-          <div className="stat-box">
-            <h3>Skills</h3>
-            <p>AI · Web · ML</p>
-          </div>
-          <div className="stat-box">
-            <h3>Status</h3>
-            <p>Active</p>
-          </div>
-        </div>
-      </div>
+    <div style={pageStyle}>
+      <marquee loop="5">
+        <h1>Welcome to my profile</h1>
+      </marquee>
+      <h1>HITANSHU Kandpal</h1>
+      <h2>Applied AI aspirant</h2>
     </div>
   );
 }
 
-function Profile() {
+function Dashboard() {
   return (
-    <div className="layout">
-      <div className="glass-card profile-card">
-        <div className="avatar">
-          <img src="/profile.jpg" alt="Profile" />
-        </div>
-
-        <h1>Hitanshu Kandpal</h1>
-        <p className="subtitle">B.Tech Student</p>
-
-        <div className="profile-info">
-          <p><strong>Interest:</strong> Web Development</p>
-          <p><strong>Focus:</strong> AI & Full Stack</p>
-          <p><strong>College:</strong> Engineering</p>
-        </div>
-      </div>
+    <div style={pageStyle}>
+      <h1>TO DO LIST: Have Fun in Life</h1>
     </div>
   );
 }
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-    </BrowserRouter>
+
+      {/* Simple navigation */}
+      <div style={{ position: "fixed", bottom: "20px", left: "20px" }}>
+        <Link to="/profile">
+          <button style={btnStyle}>Go to Profile</button>
+        </Link>
+        <br />
+        <Link to="/dashboard">
+          <button style={btnStyle}>Go to Dashboard</button>
+        </Link>
+      </div>
+    </Router>
   );
 }
 
