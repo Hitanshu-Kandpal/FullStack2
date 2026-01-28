@@ -23,7 +23,7 @@ In this experiment, three pages are created:
 
 All pages share a common full-screen UI using `100vw` and `100vh`.
 
-```jsx
+
 <BrowserRouter>
   <Routes>
     <Route path="/" element={<Home />} />
