@@ -1,16 +1,33 @@
-# React + Vite
+# Experiment 3.1 – Basic Routing in React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Aim  
+To understand and implement basic client-side routing in a React application using `react-router-dom`.
 
-Currently, two official plugins are available:
+## Theory  
+Routing in React allows us to create multiple views (pages) inside a single-page application without reloading the browser.  
+`react-router-dom` provides components like:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `BrowserRouter` – Wraps the entire app
+- `Routes` – Holds all route definitions
+- `Route` – Maps a path to a component
 
-## React Compiler
+Each route renders a different component based on the URL.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Implementation  
 
-## Expanding the ESLint configuration
+In this experiment, three pages are created:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `/` → Home Page  
+- `/contact` → Contact Page  
+- `/about` → About Page  
+
+All pages share a common full-screen UI using `100vw` and `100vh`.
+
+```jsx
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/about" element={<About />} />
+  </Routes>
+</BrowserRouter>
