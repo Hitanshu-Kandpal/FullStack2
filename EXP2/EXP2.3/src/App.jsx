@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App() {
   const [searchText, setSearchText] = useState("");
-  const [displayText, setDisplayText] = useState("Hello World");
+  const [displayText, setDisplayText] = useState("BONJOUR");
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -14,44 +13,60 @@ function App() {
   return (
     <>
       <style>{`
-        body {
+        html, body, #root {
           margin: 0;
-          background-color: #f8f9fa;
+          width: 100%;
+          height: 100%;
         }
 
-        .navbar {
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        .page-root {
+          width: 100vw;
+          min-height: 100vh;
+          background: linear-gradient(120deg, #1e293b, #020617);
         }
 
-        .main-content {
-          padding-top: 70px;
+        .floating-nav {
+          position: fixed;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80%;
+          max-width: 900px;
+          background: rgba(255,255,255,0.1);
+          backdrop-filter: blur(10px);
+          border-radius: 14px;
+          padding: 12px 20px;
+          color: white;
+        }
+
+        .center-area {
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
         }
       `}</style>
 
-      <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">Navbar</a>
-
-          <div className="collapse navbar-collapse show">
-            <form className="d-flex ms-auto" onSubmit={handleSearch}>
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
+      <div className="page-root">
+        <div className="floating-nav d-flex align-items-center">
+          <strong className="me-auto">Navbar</strong>
+          <form className="d-flex" onSubmit={handleSearch}>
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+            <button className="btn btn-outline-info" type="submit">
+              Search
+            </button>
+          </form>
         </div>
-      </nav>
 
-      <div className="main-content">
-        <div className="container text-center">
-          <h1>{displayText || "Hello World"}</h1>
+        <div className="center-area">
+          <h1>{displayText || "World"}</h1>
         </div>
       </div>
     </>
