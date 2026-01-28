@@ -3,7 +3,7 @@
 
 ## 📘 `EXP_3_3_README.md`
 
-```md
+
 # Experiment 3.3 – Styled UI with Routing
 
 ## Aim  
@@ -24,7 +24,7 @@ Routes used:
 
 ## Implementation  
 
-```jsx
+
 <BrowserRouter>
   <Routes>
     <Route path="/" element={<Dashboard />} />
