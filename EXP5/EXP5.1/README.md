@@ -282,66 +282,21 @@ function Navigation() {
 
 ### Screenshot 1: Initial Page Load
 ![Initial Page Load - Dashboard Component](./screenshots/screenshot-1-dashboard.png)
-> **Where to place this screenshot:**
-> - Create a folder named `screenshots/` in EXP5.1 if it doesn't exist
-> - Name: `screenshot-1-dashboard.png`
-> - Show: Main dashboard page with navigation
-> - Include: Any dashboard content/UI
-> - Dimensions: 1920x1080 recommended
-> - Format: PNG/JPG
 
 ### Screenshot 2: Loading State
 ![Loading Indicator While Fetching Route](./screenshots/screenshot-2-loading.png)
-> **Where to place this screenshot:**
-> - Folder: `screenshots/`
-> - Name: `screenshot-2-loading.png`
-> - Show: The loading spinner in action when navigating
-> - Include: The customizable spinner animation
-> - Tip: Navigate to /profile to trigger loading state
-> - Dimensions: 1920x1080 recommended
-> - Format: PNG/JPG
+
 
 ### Screenshot 3: Profile Page Loaded
 ![Profile Page After Loading](./screenshots/screenshot-3-profile.png)
-> **Where to place this screenshot:**
-> - Folder: `screenshots/`
-> - Name: `screenshot-3-profile.png`
-> - Show: Profile component after successful load
-> - Include: Profile details/content
-> - Dimensions: 1920x1080 recommended
-> - Format: PNG/JPG
+
 
 ### Screenshot 4: Network Tab - Bundle Chunks
 ![Bundle Chunks in DevTools Network Tab](./screenshots/screenshot-4-network-chunks.png)
-> **Where to place this screenshot:**
-> - Folder: `screenshots/`
-> - Name: `screenshot-4-network-chunks.png`
-> - How to capture:
->   - Open Chrome DevTools (F12)
->   - Go to Network tab
->   - Refresh page
->   - Navigate between routes
->   - You'll see multiple JS chunks (main.js, chunks...)
-> - Show: Multiple JS chunks being loaded on navigation
-> - Include: Dashboard chunk, Profile chunk, main chunk
-> - Dimensions: 1920x1080 recommended
-> - Format: PNG/JPG
+
 
 ### Screenshot 5: Performance Metrics (DevTools)
 ![Performance Metrics from DevTools](./screenshots/screenshot-5-performance.png)
-> **Where to place this screenshot:**
-> - Folder: `screenshots/`
-> - Name: `screenshot-5-performance.png`
-> - How to capture:
->   - Open Chrome DevTools (F12)
->   - Go to Performance tab
->   - Click Record button
->   - Navigate between pages
->   - Click Stop
->   - View the timeline
-> - Show: Load time metrics and main thread activity
-> - Include: Time to interactive, paint events
-> - Format: PNG/JPG
 
 ---
 
