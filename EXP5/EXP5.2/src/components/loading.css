@@ -1,0 +1,12 @@
+.loading-wrap{display:flex;align-items:center;gap:18px;justify-content:center;padding:28px}
+.spinner{width:60px;height:60px;border-radius:50%;background:conic-gradient(var(--accent),rgba(255,255,255,0.06),transparent);mask:radial-gradient(farthest-side,transparent 60%,black 61%);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;min-width:280px}
+.loading-card h3{margin:0 0 6px 0}
+.loading-card .muted{color:var(--muted);font-size:13px}
+.progress{height:8px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:6px;margin-top:10px;overflow:hidden;position:relative}
+.progress .bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#7de0c3);animation:progress 1.6s ease-in-out infinite}
+@keyframes progress{0%{width:8%}50%{width:70%}100%{width:8%}}
+
+.loading-wrap.fullscreen{position:fixed;inset:0;align-items:center;justify-content:center;z-index:60}
+

@@ -1,0 +1,2 @@
+.hero{position:relative;overflow:visible}
+.hero::after{content:'';position:absolute;right:8px;bottom:-28px;width:240px;height:240px;background:radial-gradient(circle at 20% 20%, rgba(110,231,183,0.08), transparent), radial-gradient(circle at 80% 80%, rgba(61,217,255,0.06), transparent);border-radius:40px;filter:blur(20px);z-index:0}

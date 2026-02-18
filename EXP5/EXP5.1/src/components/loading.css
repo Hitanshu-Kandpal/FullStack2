@@ -1,0 +1,6 @@
+.loading-wrap{display:flex;align-items:center;gap:12px;justify-content:center;padding:24px}
+.spinner{width:40px;height:40px;border-radius:50%;border:5px solid rgba(255,255,255,0.06);border-top-color:#6ee7b7;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-card{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;min-width:180px}
+.loading-card h3{margin:0;font-size:14px}
+.loading-card .muted{color:rgba(255,255,255,0.6);font-size:12px}

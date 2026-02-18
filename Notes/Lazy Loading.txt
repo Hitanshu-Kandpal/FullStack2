@@ -1,0 +1,14 @@
+LAZY LOADING is a performance optimization technique, where components are loaded only when they are required. In react, react.lazy and react.suspense, are the two things that are required
+to perform lazy loading.
+
+React.lazy allows components to load dynamically
+
+react.suspense provides a fallback ui when the components are loaded lazily.
+
+Benefits :-
+
+		Provides an optimization technique to increase the performance of the website
+
+		Improves page load time
+
+
