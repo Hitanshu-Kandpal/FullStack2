@@ -410,77 +410,25 @@ export default function Home() {
 
 ### Screenshot 1: Navigation Bar with Animated Background
 ![Navigation Bar with Animated Blobs](./screenshots/screenshot-1-navbar.png)
-> **Where to place this screenshot:**
-> - Create folder: `screenshots/` in EXP5.2
-> - File name: `screenshot-1-navbar.png`
-> - Show: Top navigation with Home, About, Contact links
-> - Include: Animated blob backgrounds
-> - Dimensions: 1920x1080 recommended
-> - Format: PNG/JPG
+
 
 ### Screenshot 2: Home Page Content
 ![Home Page with Content](./screenshots/screenshot-2-home.png)
-> **Where to place this screenshot:**
-> - Folder: `screenshots/`
-> - File name: `screenshot-2-home.png`
-> - Show: Home page content and layout
-> - Include: Main content area with blobs in background
-> - Dimensions: 1920x1080 recommended
-> - Format: PNG/JPG
 
 ### Screenshot 3: About Page Loaded
 ![About Page After Prefetch](./screenshots/screenshot-3-about.png)
-> **Where to place this screenshot:**
-> - Folder: `screenshots/`
-> - File name: `screenshot-3-about.png`
-> - Show: About page content
-> - Include: Different content from home
-> - Tip: Hover over About link, then click to see instant load
-> - Dimensions: 1920x1080 recommended
-> - Format: PNG/JPG
+
 
 ### Screenshot 4: Contact Page
 ![Contact Page Loaded](./screenshots/screenshot-4-contact.png)
-> **Where to place this screenshot:**
-> - Folder: `screenshots/`
-> - File name: `screenshot-4-contact.png`
-> - Show: Contact page with form or content
-> - Include: Page layout and styling
-> - Dimensions: 1920x1080 recommended
-> - Format: PNG/JPG
+
 
 ### Screenshot 5: DevTools Network Tab
 ![Browser Network Tab with Lazy Chunks](./screenshots/screenshot-5-network.png)
-> **Where to place this screenshot:**
-> - Folder: `screenshots/`
-> - File name: `screenshot-5-network.png`
-> - How to capture:
->   - Open DevTools (F12)
->   - Go to Network tab
->   - Check "Disable cache"
->   - Refresh page
->   - Navigate between routes slowly
->   - You'll see main.js + individual chunks
-> - Show: Multiple JS chunks being loaded asynchronously
-> - Include: File sizes and load times
-> - Format: PNG/JPG
+
 
 ### Screenshot 6: Chrome DevTools Performance Timeline
 ![Chrome DevTools Performance Timeline](./screenshots/screenshot-6-performance.png)
-> **Where to place this screenshot:**
-> - Folder: `screenshots/`
-> - File name: `screenshot-6-performance.png`
-> - How to capture:
->   - Open DevTools (F12)
->   - Go to Performance tab
->   - Click Record
->   - Wait 2 seconds
->   - Click a navigation link
->   - Wait for page to load
->   - Click Stop
-> - Show: Timeline of events
-> - Include: Parse, compile, and render times
-> - Format: PNG/JPG
 
 ---
 
