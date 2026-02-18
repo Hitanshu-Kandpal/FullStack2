@@ -1,16 +1,69 @@
-# React + Vite
+# EXP4.1: React Context API Counter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple counter application demonstrating the use of React's **Context API** for state management without external libraries.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✨ Simple counter with increment/decrement functionality
+- 🎯 Context API for global state management
+- 🎨 Clean and responsive UI
+- ⚡ Built with React and Vite
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React (v19+)
+- Vite
+- CSS3
 
-## Expanding the ESLint configuration
+## Installation & Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Navigate to the project directory
+   ```bash
+   cd EXP4.1
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+
+3. Start the development server
+   ```bash
+   npm run dev
+   ```
+
+4. Open `http://localhost:5173` in your browser
+
+## Project Structure
+
+```
+src/
+├── App.jsx       # Main component with Context Provider
+├── App.css       # Styling
+├── main.jsx      # React entry point
+└── index.css     # Global styles
+```
+
+## How It Works
+
+- **CounterContext**: Created using `createContext()` to store counter state
+- **Provider**: App component wraps children with `CounterContext.Provider`
+- **useContext Hook**: Components access count and methods from context
+- **State Management**: `useState` hook manages the counter value
+
+## Key Concepts
+
+- Context API for avoiding prop drilling
+- `createContext()` for creating context
+- `useContext()` hook for consuming context values
+- Local state management with `useState()`
+
+## Screenshots
+
+![Screenshot of page!](./screenshots/app.png)
+
+## Usage
+
+1. Click **Increment** button to increase the count
+2. Click **Decrement** button to decrease the count (minimum is 0)
+3. The header displays the current count value

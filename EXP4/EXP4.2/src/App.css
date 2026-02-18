@@ -22,7 +22,7 @@ html, body, #root {
 }
 
 .card {
-  width: 1100px;
+  width: 1300px;
   padding: 70px;
   background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(22px);
@@ -33,6 +33,8 @@ html, body, #root {
   color: #e5e7eb;
 }
 
+/* ---------- HEADER ---------- */
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -41,8 +43,9 @@ html, body, #root {
 }
 
 .header h1 {
-  font-size: 42px;
+  font-size: 46px;
   font-weight: 700;
+  letter-spacing: 0.5px;
   margin: 0;
   background: linear-gradient(90deg, #38bdf8, #22d3ee);
   -webkit-background-clip: text;
@@ -58,32 +61,73 @@ html, body, #root {
   box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
 }
 
-.content.single {
-  text-align: center;
+/* ---------- LAYOUT ---------- */
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
 }
 
-h2 {
+/* ---------- SECTIONS ---------- */
+
+section h2 {
+  font-size: 28px;
+  margin-bottom: 25px;
   color: #93c5fd;
-  margin-bottom: 30px;
 }
 
-.value {
-  font-size: 64px;
-  font-weight: 700;
-  margin: 20px 0 40px;
+/* ---------- PRODUCTS ---------- */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
-.controls {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+.product-card {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 59, 0.95),
+    rgba(15, 23, 42, 0.95)
+  );
+  border-radius: 22px;
+  padding: 26px;
+  text-align: center;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 35px 70px rgba(0, 0, 0, 0.85),
+    0 0 40px rgba(56, 189, 248, 0.25);
+}
+
+.product-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 18px;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8));
+}
+
+.product-card h3 {
+  margin: 12px 0 18px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ---------- BUTTONS ---------- */
 
 button {
-  padding: 14px 28px;
+  padding: 12px 22px;
   border-radius: 14px;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   color: white;
@@ -97,6 +141,37 @@ button:hover {
   box-shadow: 0 0 35px rgba(56, 189, 248, 0.75);
 }
 
+/* ---------- CART ---------- */
+
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cart-item {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 59, 0.9),
+    rgba(15, 23, 42, 0.9)
+  );
+  border-radius: 18px;
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow:
+    0 18px 35px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.cart-item span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* ---------- REMOVE ---------- */
+
 .remove {
   background: linear-gradient(135deg, #dc2626, #f87171);
   box-shadow: 0 0 20px rgba(248, 113, 113, 0.6);
@@ -104,4 +179,12 @@ button:hover {
 
 .remove:hover {
   box-shadow: 0 0 35px rgba(248, 113, 113, 0.9);
+}
+
+/* ---------- EMPTY ---------- */
+
+.empty {
+  font-style: italic;
+  color: #94a3b8;
+  margin-top: 20px;
 }

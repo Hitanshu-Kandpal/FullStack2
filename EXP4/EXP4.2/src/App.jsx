@@ -1,60 +1,95 @@
 import { Provider, useDispatch, useSelector } from "react-redux";
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import store, { addItem, removeItem } from "./store";
 import "./App.css";
 
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: { value: 0 },
-  reducers: {
-    increment: state => { state.value += 1; },
-    decrement: state => { state.value -= 1; },
-  },
-});
+import laptopImg from "./assets/laptop.png";
+import phoneImg from "./assets/phone.png";
+import headphonesImg from "./assets/headphones.png";
 
-const store = configureStore({
-  reducer: { counter: counterSlice.reducer },
-});
+const products = [
+  { name: "Laptop", image: laptopImg },
+  { name: "Phone", image: phoneImg },
+  { name: "Headphones", image: headphonesImg },
+];
 
-function Counter() {
-  const count = useSelector(state => state.counter.value);
+function Header() {
+  const cart = useSelector((state) => state.cart);
+  return (
+    <div className="header">
+      <h1>Shopping Cart</h1>
+      <span className="badge">Items: {cart.length}</span>
+    </div>
+  );
+}
+
+function Products() {
   const dispatch = useDispatch();
 
   return (
-    <>
-      <p className="value">{count}</p>
-      <div className="controls">
-        <button onClick={() => dispatch(counterSlice.actions.increment())}>
-          Increment
-        </button>
-        <button
-          className="remove"
-          onClick={() => dispatch(counterSlice.actions.decrement())}
-        >
-          Decrement
-        </button>
-      </div>
-    </>
+    <div className="products">
+      {products.map((p) => (
+        <div key={p.name} className="product-card">
+          <img src={p.image} alt={p.name} />
+          <h3>{p.name}</h3>
+          <button onClick={() => dispatch(addItem(p.name))}>
+            Add to Cart
+          </button>
+        </div>
+      ))}
+    </div>
   );
 }
 
-function App() {
-  return (
-    <Provider store={store}>
-      <div className="page">
-        <div className="card">
-          <div className="header">
-            <h1>Redux Counter</h1>
-            <span className="badge">Global Store</span>
-          </div>
+function Cart() {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
-          <div className="content single">
-            <h2>Centralized State Management</h2>
-            <Counter />
-          </div>
+  if (cart.length === 0) {
+    return <p className="empty">Cart is empty</p>;
+  }
+
+  return (
+    <div className="cart-list">
+      {cart.map((item, index) => (
+        <div key={index} className="cart-item">
+          <span>{item}</span>
+          <button
+            className="remove"
+            onClick={() => dispatch(removeItem(index))}
+          >
+            Remove
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function AppContent() {
+  return (
+    <div className="page">
+      <div className="card">
+        <Header />
+        <div className="content">
+          <section>
+            <h2>Products</h2>
+            <Products />
+          </section>
+
+          <section>
+            <h2>Cart</h2>
+            <Cart />
+          </section>
         </div>
       </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Provider store={store}>
+      <AppContent />
     </Provider>
   );
 }
-
-export default App;

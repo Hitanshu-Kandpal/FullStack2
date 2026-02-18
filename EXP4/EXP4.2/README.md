@@ -1,16 +1,82 @@
-# React + Vite
+# EXP4.2: Shopping Cart with Redux
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A shopping cart application demonstrating **Redux** for managing cart state with product management features.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🛒 Add and remove products from cart
+- 📊 Display cart item count
+- 💻 Product showcase with images
+- 🔄 Redux state management
+- 🎨 Clean and intuitive UI
+- ⚡ Built with React and Vite
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React (v19+)
+- Redux Toolkit
+- Vite
+- CSS3
 
-## Expanding the ESLint configuration
+## Installation & Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Navigate to the project directory
+   ```bash
+   cd EXP4.2
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+
+3. Start the development server
+   ```bash
+   npm run dev
+   ```
+
+4. Open `http://localhost:5173` in your browser
+
+## Project Structure
+
+```
+src/
+├── App.jsx       # Main component with cart and products
+├── store.js      # Redux store configuration
+├── App.css       # Styling
+├── assets/       # Product images
+├── main.jsx      # React entry point
+└── index.css     # Global styles
+```
+
+## How It Works
+
+- **Redux Store**: Manages cart items in global state
+- **addItem Action**: Adds product name to cart
+- **removeItem Action**: Removes product from cart
+- **useSelector()**: Accesses cart state from Redux
+- **useDispatch()**: Dispatches add/remove actions
+- **Product List**: Shows available products with images
+- **Cart Display**: Shows added items with remove option
+
+## Key Concepts
+
+- Redux for cart state management
+- Actions for adding and removing items
+- Product list management
+- Dynamic item count display
+- Empty cart state handling
+
+## Screenshots
+
+![Screenshot of page!](./screenshots/app.png)
+![Screenshot of Redux Toolkit!](./screenshots/tool.png)
+
+
+## Usage
+
+1. Browse the **Products** section
+2. Click **Add to Cart** to add items
+3. View **Cart** section with added items
+4. Click **Remove** to delete items from cart
+5. Cart item count updates automatically
