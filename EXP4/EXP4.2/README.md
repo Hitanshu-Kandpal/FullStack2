@@ -69,7 +69,10 @@ src/
 
 ## Screenshots
 
+### Initial page of shopping cart with item counter
 ![Screenshot of page!](./screenshots/app.png)
+
+### Redux Toolkit extension in use
 ![Screenshot of Redux Toolkit!](./screenshots/tool.png)
 
 
