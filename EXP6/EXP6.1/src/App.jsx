@@ -32,6 +32,7 @@ function App() {
       ...formData,
       [name]: value,
     })
+
   }
 
   const handleSkillsChange = (e) => {
