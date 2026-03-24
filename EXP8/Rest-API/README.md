@@ -137,7 +137,6 @@ Retrieves a list of all students.
 ]
 ```
 
-**Postman Screenshot Placeholder:**
 ![Get All Students](screenshots/get-all-students.png)
 
 ---
@@ -162,7 +161,6 @@ Retrieves a specific student by their ID.
 }
 ```
 
-**Postman Screenshot Placeholder:**
 ![Get Student by ID](screenshots/get-student-by-id.png)
 
 ---
@@ -191,7 +189,7 @@ Creates a new student record.
 }
 ```
 
-**Postman Screenshot Placeholder:**
+
 ![Create Student](screenshots/create-student.png)
 
 ---
@@ -223,7 +221,6 @@ Updates an existing student record.
 }
 ```
 
-**Postman Screenshot Placeholder:**
 ![Update Student](screenshots/update-student.png)
 
 ---
@@ -244,7 +241,7 @@ Deletes a student record by ID.
 "Student deleted successfully"
 ```
 
-**Postman Screenshot Placeholder:**
+
 ![Delete Student](screenshots/delete-student.png)
 
 ## API Testing with Postman
