@@ -1,0 +1,6 @@
+Placeholder for User Registration Screenshot
+
+This image should show:
+- Postman POST request to /api/auth/register
+- Request body with user registration data
+- Successful response (201 Created)

@@ -1,0 +1,6 @@
+Placeholder for User Login Screenshot
+
+This image should show:
+- Postman POST request to /api/auth/login
+- Request body with username and password
+- Response containing JWT token

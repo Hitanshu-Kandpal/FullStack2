@@ -1,0 +1,6 @@
+Placeholder for JWT Token Response Screenshot
+
+This image should show:
+- The JSON response from login endpoint
+- JWT token in the response body
+- Token structure (header.payload.signature)

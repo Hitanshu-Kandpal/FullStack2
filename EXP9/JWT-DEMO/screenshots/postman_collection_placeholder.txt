@@ -1,0 +1,6 @@
+Placeholder for Postman Collection Screenshot
+
+This image should show:
+- Postman workspace with JWT demo collection
+- Organized requests for registration, login, and protected endpoints
+- Environment variables for base URL and JWT token

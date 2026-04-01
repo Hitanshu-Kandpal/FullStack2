@@ -1,0 +1,6 @@
+Placeholder for Protected Endpoint Access Screenshot
+
+This image should show:
+- GET request to /api/users/profile
+- Authorization header with Bearer token
+- Successful response with user data
