@@ -106,7 +106,7 @@ The application will start on `http://localhost:8080`
 
 1. **Register a new user**
    - Method: POST
-   - URL: `http://localhost:8080/api/auth/register`
+   - URL: `http://localhost:8080/api/hello`
    - Body (JSON):
      ```json
      {
@@ -118,7 +118,7 @@ The application will start on `http://localhost:8080`
 
 2. **Login to get JWT token**
    - Method: POST
-   - URL: `http://localhost:8080/api/auth/login`
+   - URL: `http://localhost:8080/api/login`
    - Body (JSON):
      ```json
      {
