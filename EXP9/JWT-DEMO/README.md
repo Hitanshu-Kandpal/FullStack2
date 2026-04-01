@@ -103,8 +103,31 @@ The application will start on `http://localhost:8080`
 
 1. **Login to get JWT token**
    - Method: POST
+<<<<<<< HEAD
    - URL: `http://localhost:8080/api/login`
    - Body: Form-data with `username` and `password`
+=======
+   - URL: `http://localhost:8080/api/hello`
+   - Body (JSON):
+     ```json
+     {
+       "username": "testuser",
+       "password": "password123",
+       "email": "test@example.com"
+     }
+     ```
+
+2. **Login to get JWT token**
+   - Method: POST
+   - URL: `http://localhost:8080/api/login`
+   - Body (JSON):
+     ```json
+     {
+       "username": "testuser",
+       "password": "password123"
+     }
+     ```
+>>>>>>> f2f5dde182d4bbdd846499760440f0898f9a3302
    - Response will contain the JWT token
 
 2. **Access protected endpoints**
@@ -144,5 +167,9 @@ The application uses Spring Security with JWT. Currently, all requests are permi
 
 ## License
 
+<<<<<<< HEAD
 This project is licensed under the MIT License.</content>
 <parameter name="filePath">c:\Users\hitan\Desktop\Dont open\College\FSD 2\EXP9\JWT-DEMO\README.md
+=======
+This project is licensed under the MIT License.
+>>>>>>> f2f5dde182d4bbdd846499760440f0898f9a3302
