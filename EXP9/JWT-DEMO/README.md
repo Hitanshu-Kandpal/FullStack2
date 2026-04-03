@@ -167,9 +167,5 @@ The application uses Spring Security with JWT. Currently, all requests are permi
 
 ## License
 
-<<<<<<< HEAD
-This project is licensed under the MIT License.</content>
-<parameter name="filePath">c:\Users\hitan\Desktop\Dont open\College\FSD 2\EXP9\JWT-DEMO\README.md
-=======
 This project is licensed under the MIT License.
->>>>>>> f2f5dde182d4bbdd846499760440f0898f9a3302
+
