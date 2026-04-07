@@ -1,5 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import {
+  BookOpen,
+  PencilLine,
+  Search,
+  Sparkles,
+  Trash2,
+  UserPlus,
+  Users,
+} from "lucide-react";
 import { getAllStudents, getStudentById, addStudent, updateStudent, deleteStudent } from "./api";
+import "./App.css";
 
 export default function App() {
   const [students, setStudents] = useState([]);
@@ -101,483 +111,252 @@ export default function App() {
     setMessage("");
   };
 
-  // Design System
-  const styles = {
-    // Layout
-    container: {
-      minHeight: '100vh',
-      backgroundColor: '#0f172a',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-      color: '#e2e8f0',
-      width: '100vw',
-      overflowX: 'hidden',
-    },
-    main: {
-      maxWidth: '1200px',
-      margin: '0 auto',
-      padding: '32px 24px',
-      width: '100%',
-    },
+  const totalStudents = students.length;
+  const computerScienceStudents = useMemo(
+    () => students.filter((student) => student.course.toLowerCase().includes("computer")).length,
+    [students],
+  );
+  const totalCourses = useMemo(() => new Set(students.map((student) => student.course)).size, [students]);
 
-    // Header
-    header: {
-      marginBottom: '48px',
-    },
-    title: {
-      fontSize: '32px',
-      fontWeight: '700',
-      color: '#f8fafc',
-      margin: '0 0 8px 0',
-    },
-    subtitle: {
-      fontSize: '16px',
-      color: '#94a3b8',
-      margin: '0',
-    },
-
-    // Cards
-    card: {
-      backgroundColor: '#1e293b',
-      borderRadius: '12px',
-      padding: '24px',
-      marginBottom: '24px',
-      border: '1px solid #334155',
-      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-    },
-    cardTitle: {
-      fontSize: '18px',
-      fontWeight: '600',
-      color: '#f8fafc',
-      margin: '0 0 16px 0',
-    },
-
-    // Form
-    form: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '16px',
-      alignItems: 'end',
-    },
-    formGroup: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    label: {
-      fontSize: '14px',
-      fontWeight: '500',
-      color: '#cbd5e1',
-      marginBottom: '6px',
-    },
-    input: {
-      padding: '10px 12px',
-      border: '1px solid #475569',
-      borderRadius: '8px',
-      backgroundColor: '#334155',
-      color: '#f8fafc',
-      fontSize: '14px',
-      transition: 'border-color 0.2s, box-shadow 0.2s',
-    },
-    inputFocus: {
-      outline: 'none',
-      borderColor: '#3b82f6',
-      boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.1)',
-    },
-    buttonGroup: {
-      display: 'flex',
-      gap: '12px',
-    },
-
-    // Buttons
-    button: {
-      padding: '10px 16px',
-      border: 'none',
-      borderRadius: '8px',
-      fontSize: '14px',
-      fontWeight: '500',
-      cursor: 'pointer',
-      transition: 'all 0.2s',
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '6px',
-    },
-    primaryButton: {
-      backgroundColor: '#3b82f6',
-      color: 'white',
-    },
-    primaryButtonHover: {
-      backgroundColor: '#2563eb',
-      transform: 'translateY(-1px)',
-    },
-    secondaryButton: {
-      backgroundColor: '#64748b',
-      color: 'white',
-    },
-    secondaryButtonHover: {
-      backgroundColor: '#475569',
-    },
-    dangerButton: {
-      backgroundColor: '#ef4444',
-      color: 'white',
-    },
-    dangerButtonHover: {
-      backgroundColor: '#dc2626',
-    },
-
-    // Search
-    searchSection: {
-      display: 'flex',
-      gap: '12px',
-      alignItems: 'end',
-    },
-
-    // Stats
-    statsGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '16px',
-      marginBottom: '24px',
-    },
-    statCard: {
-      backgroundColor: '#1e293b',
-      borderRadius: '12px',
-      padding: '20px',
-      border: '1px solid #334155',
-      textAlign: 'center',
-    },
-    statNumber: {
-      fontSize: '28px',
-      fontWeight: '700',
-      color: '#3b82f6',
-      margin: '0 0 4px 0',
-    },
-    statLabel: {
-      fontSize: '14px',
-      color: '#94a3b8',
-      margin: '0',
-      textTransform: 'uppercase',
-      letterSpacing: '0.5px',
-    },
-
-    // Table
-    table: {
-      width: '100%',
-      borderCollapse: 'collapse',
-      backgroundColor: '#1e293b',
-      borderRadius: '12px',
-      overflow: 'hidden',
-      border: '1px solid #334155',
-    },
-    tableHeader: {
-      backgroundColor: '#334155',
-      padding: '16px',
-      textAlign: 'left',
-      fontSize: '14px',
-      fontWeight: '600',
-      color: '#cbd5e1',
-      borderBottom: '1px solid #475569',
-    },
-    tableCell: {
-      padding: '16px',
-      borderBottom: '1px solid #334155',
-      fontSize: '14px',
-      color: '#e2e8f0',
-    },
-    tableRow: {
-      transition: 'background-color 0.2s',
-    },
-    tableRowHover: {
-      backgroundColor: '#334155',
-    },
-
-    // Actions
-    actionButton: {
-      padding: '6px 12px',
-      border: 'none',
-      borderRadius: '6px',
-      fontSize: '12px',
-      fontWeight: '500',
-      cursor: 'pointer',
-      transition: 'all 0.2s',
-      marginRight: '8px',
-    },
-    editButton: {
-      backgroundColor: '#f59e0b',
-      color: 'white',
-    },
-    editButtonHover: {
-      backgroundColor: '#d97706',
-    },
-    deleteButton: {
-      backgroundColor: '#ef4444',
-      color: 'white',
-    },
-    deleteButtonHover: {
-      backgroundColor: '#dc2626',
-    },
-
-    // Messages
-    message: {
-      padding: '12px 16px',
-      borderRadius: '8px',
-      marginBottom: '24px',
-      fontSize: '14px',
-      fontWeight: '500',
-    },
-    successMessage: {
-      backgroundColor: '#10b981',
-      color: 'white',
-    },
-    errorMessage: {
-      backgroundColor: '#ef4444',
-      color: 'white',
-    },
-
-    // Loading
-    loading: {
-      textAlign: 'center',
-      padding: '48px',
-      color: '#94a3b8',
-    },
-
-    // Empty state
-    emptyState: {
-      textAlign: 'center',
-      padding: '64px 24px',
-      color: '#94a3b8',
-    },
-    emptyIcon: {
-      fontSize: '48px',
-      marginBottom: '16px',
-    },
-  };
+  const statusTone = message.toLowerCase().includes("failed") || message.toLowerCase().includes("required") || message.toLowerCase().includes("not found")
+    ? "status-banner status-banner--error"
+    : "status-banner status-banner--success";
 
   return (
-    <div style={styles.container}>
-      <div style={styles.main}>
-        {/* Header */}
-        <div style={styles.header}>
-          <h1 style={styles.title}>Student Management</h1>
-          <p style={styles.subtitle}>Manage your student records efficiently</p>
-        </div>
+    <div className="student-dashboard-shell">
+      <div className="student-dashboard-backdrop student-dashboard-backdrop--left" />
+      <div className="student-dashboard-backdrop student-dashboard-backdrop--right" />
 
-        {/* Messages */}
-        {message && (
-          <div style={{
-            ...styles.message,
-            ...(message.includes("success") ? styles.successMessage : styles.errorMessage)
-          }}>
-            {message}
+      <main className="student-dashboard">
+        <section className="hero-panel">
+          <div className="hero-copy">
+            <span className="hero-kicker">Campus operations</span>
+            <h1 className="hero-title">Student Management</h1>
+            <p className="hero-description">
+              Manage records, update details, and keep your student list organized from one clear workspace.
+            </p>
           </div>
-        )}
 
-        {/* Add Student Form */}
-        <div style={styles.card}>
-          <h2 style={styles.cardTitle}>
-            {isEditing ? "Edit Student" : "Add New Student"}
-          </h2>
-          <form onSubmit={handleSubmit} style={styles.form}>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Student ID</label>
-              <input
-                style={styles.input}
-                type="number"
-                placeholder="Enter student ID"
-                value={form.id}
-                onChange={(e) => setForm({ ...form, id: e.target.value })}
-                disabled={isEditing}
-                required
-                onFocus={(e) => Object.assign(e.target.style, styles.inputFocus)}
-                onBlur={(e) => {
-                  e.target.style.borderColor = '#475569';
-                  e.target.style.boxShadow = 'none';
-                }}
-              />
+          <div className="hero-highlight-card">
+            <div className="hero-highlight-label">
+              <Sparkles size={16} />
+              <span>System snapshot</span>
             </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Full Name</label>
-              <input
-                style={styles.input}
-                type="text"
-                placeholder="Enter full name"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                required
-                onFocus={(e) => Object.assign(e.target.style, styles.inputFocus)}
-                onBlur={(e) => {
-                  e.target.style.borderColor = '#475569';
-                  e.target.style.boxShadow = 'none';
-                }}
-              />
+            <div className="hero-highlight-value">{totalStudents}</div>
+            <p className="hero-highlight-text">Active student records currently available in the system.</p>
+          </div>
+        </section>
+
+        {message && <div className={statusTone}>{message}</div>}
+
+        <section className="overview-grid" aria-label="Student overview">
+          <article className="metric-card">
+            <div className="metric-card__icon metric-card__icon--blue">
+              <Users size={20} />
             </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Course</label>
-              <input
-                style={styles.input}
-                type="text"
-                placeholder="Enter course"
-                value={form.course}
-                onChange={(e) => setForm({ ...form, course: e.target.value })}
-                required
-                onFocus={(e) => Object.assign(e.target.style, styles.inputFocus)}
-                onBlur={(e) => {
-                  e.target.style.borderColor = '#475569';
-                  e.target.style.boxShadow = 'none';
-                }}
-              />
+            <div>
+              <p className="metric-card__label">Total Students</p>
+              <h2 className="metric-card__value">{totalStudents}</h2>
             </div>
-            <div style={styles.buttonGroup}>
-              <button
-                style={{ ...styles.button, ...styles.primaryButton }}
-                type="submit"
-                disabled={loading}
-                onMouseEnter={(e) => Object.assign(e.target.style, styles.primaryButtonHover)}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
-              >
-                {loading ? "Processing..." : (isEditing ? "Update Student" : "Add Student")}
-              </button>
-              {isEditing && (
-                <button
-                  style={{ ...styles.button, ...styles.secondaryButton }}
-                  type="button"
-                  onClick={handleCancel}
-                  onMouseEnter={(e) => Object.assign(e.target.style, styles.secondaryButtonHover)}
-                  onMouseLeave={(e) => e.target.style.backgroundColor = '#64748b'}
-                >
-                  Cancel
+          </article>
+
+          <article className="metric-card">
+            <div className="metric-card__icon metric-card__icon--amber">
+              <BookOpen size={20} />
+            </div>
+            <div>
+              <p className="metric-card__label">CS Students</p>
+              <h2 className="metric-card__value">{computerScienceStudents}</h2>
+            </div>
+          </article>
+
+          <article className="metric-card">
+            <div className="metric-card__icon metric-card__icon--teal">
+              <Sparkles size={20} />
+            </div>
+            <div>
+              <p className="metric-card__label">Courses</p>
+              <h2 className="metric-card__value">{totalCourses}</h2>
+            </div>
+          </article>
+        </section>
+
+        <section className="workspace-grid">
+          <article className="panel-card panel-card--form">
+            <div className="panel-heading">
+              <div>
+                <p className="panel-eyebrow">Record editor</p>
+                <h2 className="panel-title">{isEditing ? "Edit Student" : "Add New Student"}</h2>
+              </div>
+              <div className="panel-chip">
+                <UserPlus size={16} />
+                <span>{isEditing ? "Update mode" : "New record"}</span>
+              </div>
+            </div>
+
+            <form className="student-form" onSubmit={handleSubmit}>
+              <label className="field-group">
+                <span className="field-label">Student ID</span>
+                <input
+                  className="field-input"
+                  type="number"
+                  placeholder="Enter student ID"
+                  value={form.id}
+                  onChange={(e) => setForm({ ...form, id: e.target.value })}
+                  disabled={isEditing}
+                  required
+                />
+              </label>
+
+              <label className="field-group">
+                <span className="field-label">Full Name</span>
+                <input
+                  className="field-input"
+                  type="text"
+                  placeholder="Enter full name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  required
+                />
+              </label>
+
+              <label className="field-group">
+                <span className="field-label">Course</span>
+                <input
+                  className="field-input"
+                  type="text"
+                  placeholder="Enter course"
+                  value={form.course}
+                  onChange={(e) => setForm({ ...form, course: e.target.value })}
+                  required
+                />
+              </label>
+
+              <div className="form-actions">
+                <button className="primary-action" type="submit" disabled={loading}>
+                  {isEditing ? <PencilLine size={16} /> : <UserPlus size={16} />}
+                  <span>{loading ? "Processing..." : isEditing ? "Update Student" : "Add Student"}</span>
                 </button>
-              )}
-            </div>
-          </form>
-        </div>
 
-        {/* Search Section */}
-        <div style={styles.card}>
-          <h2 style={styles.cardTitle}>Search Student</h2>
-          <div style={styles.searchSection}>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Student ID</label>
-              <input
-                style={styles.input}
-                type="number"
-                placeholder="Enter student ID"
-                value={searchId}
-                onChange={(e) => setSearchId(e.target.value)}
-                onFocus={(e) => Object.assign(e.target.style, styles.inputFocus)}
-                onBlur={(e) => {
-                  e.target.style.borderColor = '#475569';
-                  e.target.style.boxShadow = 'none';
-                }}
-              />
+                {isEditing && (
+                  <button className="secondary-action" type="button" onClick={handleCancel}>
+                    Cancel
+                  </button>
+                )}
+              </div>
+            </form>
+          </article>
+
+          <article className="panel-card panel-card--search">
+            <div className="panel-heading">
+              <div>
+                <p className="panel-eyebrow">Quick lookup</p>
+                <h2 className="panel-title">Search Student</h2>
+              </div>
+              <div className="panel-chip">
+                <Search size={16} />
+                <span>ID search</span>
+              </div>
             </div>
-            <button
-              style={{ ...styles.button, ...styles.primaryButton }}
-              onClick={fetchStudentByIdHandler}
-              disabled={loading}
-              onMouseEnter={(e) => Object.assign(e.target.style, styles.primaryButtonHover)}
-              onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
-            >
-              {loading ? "Searching..." : "Search"}
-            </button>
+
+            <div className="search-layout">
+              <label className="field-group field-group--search">
+                <span className="field-label">Student ID</span>
+                <input
+                  className="field-input"
+                  type="number"
+                  placeholder="Enter student ID"
+                  value={searchId}
+                  onChange={(e) => setSearchId(e.target.value)}
+                />
+              </label>
+
+              <button className="primary-action primary-action--search" onClick={fetchStudentByIdHandler} disabled={loading}>
+                <Search size={16} />
+                <span>{loading ? "Searching..." : "Search"}</span>
+              </button>
+            </div>
+
+            {singleStudent && (
+              <div className="search-result-card">
+                <div className="search-result-header">
+                  <h3 className="search-result-title">Search Result</h3>
+                  <span className="search-result-badge">Student found</span>
+                </div>
+
+                <div className="search-result-grid">
+                  <div className="search-result-item">
+                    <span className="search-result-key">ID</span>
+                    <strong className="search-result-value">{singleStudent.id}</strong>
+                  </div>
+                  <div className="search-result-item">
+                    <span className="search-result-key">Name</span>
+                    <strong className="search-result-value">{singleStudent.name}</strong>
+                  </div>
+                  <div className="search-result-item">
+                    <span className="search-result-key">Course</span>
+                    <strong className="search-result-value">{singleStudent.course}</strong>
+                  </div>
+                </div>
+              </div>
+            )}
+          </article>
+        </section>
+
+        <section className="panel-card roster-panel">
+          <div className="panel-heading panel-heading--spaced">
+            <div>
+              <p className="panel-eyebrow">Student roster</p>
+              <h2 className="panel-title">All Students</h2>
+            </div>
+            <span className="panel-chip panel-chip--neutral">{totalStudents} records</span>
           </div>
 
-          {singleStudent && (
-            <div style={{
-              marginTop: '20px',
-              padding: '16px',
-              backgroundColor: '#334155',
-              borderRadius: '8px',
-              border: '1px solid #475569'
-            }}>
-              <h3 style={{ margin: '0 0 12px 0', color: '#f8fafc', fontSize: '16px' }}>Search Result</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '12px' }}>
-                <div>
-                  <span style={{ fontWeight: '600', color: '#cbd5e1' }}>ID:</span> {singleStudent.id}
-                </div>
-                <div>
-                  <span style={{ fontWeight: '600', color: '#cbd5e1' }}>Name:</span> {singleStudent.name}
-                </div>
-                <div>
-                  <span style={{ fontWeight: '600', color: '#cbd5e1' }}>Course:</span> {singleStudent.course}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Stats and Student List */}
-        <div style={styles.card}>
-          {/* Stats */}
-          <div style={styles.statsGrid}>
-            <div style={styles.statCard}>
-              <div style={styles.statNumber}>{students.length}</div>
-              <div style={styles.statLabel}>Total Students</div>
-            </div>
-            <div style={styles.statCard}>
-              <div style={styles.statNumber}>
-                {students.filter(s => s.course.toLowerCase().includes('computer')).length}
-              </div>
-              <div style={styles.statLabel}>CS Students</div>
-            </div>
-            <div style={styles.statCard}>
-              <div style={styles.statNumber}>
-                {new Set(students.map(s => s.course)).size}
-              </div>
-              <div style={styles.statLabel}>Courses</div>
-            </div>
-          </div>
-
-          {/* Student List */}
-          <h2 style={styles.cardTitle}>All Students</h2>
-
-          {loading && <div style={styles.loading}>Loading students...</div>}
+          {loading && <div className="loading-state">Loading students...</div>}
 
           {!loading && students.length === 0 && (
-            <div style={styles.emptyState}>
-              <div style={styles.emptyIcon}>📭</div>
-              <h3 style={{ margin: '0 0 8px 0', color: '#cbd5e1' }}>No students found</h3>
-              <p style={{ margin: '0' }}>Add your first student to get started</p>
+            <div className="empty-roster-state">
+              <div className="empty-roster-icon">📭</div>
+              <h3 className="empty-roster-title">No students found</h3>
+              <p className="empty-roster-copy">Add your first student to get started.</p>
             </div>
           )}
 
           {!loading && students.length > 0 && (
-            <div style={{ overflowX: 'auto' }}>
-              <table style={styles.table}>
+            <div className="table-scroll-frame">
+              <table className="student-roster-table">
                 <thead>
                   <tr>
-                    <th style={styles.tableHeader}>ID</th>
-                    <th style={styles.tableHeader}>Name</th>
-                    <th style={styles.tableHeader}>Course</th>
-                    <th style={styles.tableHeader}>Actions</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {students.map((student) => (
-                    <tr
-                      key={student.id}
-                      style={styles.tableRow}
-                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#334155'}
-                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                    >
-                      <td style={styles.tableCell}>{student.id}</td>
-                      <td style={styles.tableCell}>{student.name}</td>
-                      <td style={styles.tableCell}>{student.course}</td>
-                      <td style={styles.tableCell}>
-                        <button
-                          style={{ ...styles.actionButton, ...styles.editButton }}
-                          onClick={() => handleEdit(student)}
-                          onMouseEnter={(e) => Object.assign(e.target.style, styles.editButtonHover)}
-                          onMouseLeave={(e) => e.target.style.backgroundColor = '#f59e0b'}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          style={{ ...styles.actionButton, ...styles.deleteButton }}
-                          onClick={() => handleDelete(student.id)}
-                          onMouseEnter={(e) => Object.assign(e.target.style, styles.deleteButtonHover)}
-                          onMouseLeave={(e) => e.target.style.backgroundColor = '#ef4444'}
-                        >
-                          Delete
-                        </button>
+                    <tr key={student.id}>
+                      <td>{student.id}</td>
+                      <td>
+                        <div className="student-name-cell">
+                          <span className="student-avatar">{student.name.charAt(0).toUpperCase()}</span>
+                          <span>{student.name}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span className="course-pill">{student.course}</span>
+                      </td>
+                      <td>
+                        <div className="row-actions">
+                          <button className="table-action table-action--edit" onClick={() => handleEdit(student)}>
+                            <PencilLine size={14} />
+                            <span>Edit</span>
+                          </button>
+                          <button className="table-action table-action--delete" onClick={() => handleDelete(student.id)}>
+                            <Trash2 size={14} />
+                            <span>Delete</span>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -585,8 +364,8 @@ export default function App() {
               </table>
             </div>
           )}
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }
