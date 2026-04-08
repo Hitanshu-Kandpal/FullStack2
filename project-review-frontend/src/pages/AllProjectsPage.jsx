@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getAllProjects } from '../components/Api'
+import { deleteProject, getAllProjects } from '../components/Api'
 import ErrorBox from '../components/ErrorBox'
 import Loading from '../components/Loading'
 import StatusBadge from '../components/StatusBadge'
@@ -11,6 +11,8 @@ export default function AllProjectsPage() {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [actionError, setActionError] = useState(null)
+  const [deletingId, setDeletingId] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -42,6 +44,7 @@ export default function AllProjectsPage() {
       <p className="muted">Submissions from all users.</p>
 
       {error ? <ErrorBox message={error} /> : null}
+      {actionError ? <ErrorBox message={actionError} /> : null}
       {loading ? <Loading label="Loading submissions..." /> : null}
 
       {!loading && !error && projects.length === 0 ? (
@@ -67,9 +70,32 @@ export default function AllProjectsPage() {
                   <StatusBadge status={p.status} />
                 </td>
                 <td>
-                  <Link to={`/review/${p.id}`} className="github-link">
-                    Review
-                  </Link>
+                  <div className="row-actions">
+                    <Link to={`/review/${p.id}`} className="github-link">
+                      Review
+                    </Link>
+                    <button
+                      type="button"
+                      className="button danger"
+                      style={{ padding: '8px 10px' }}
+                      disabled={deletingId !== null}
+                      onClick={async () => {
+                        if (!window.confirm('Delete this submission? This cannot be undone.')) return
+                        setActionError(null)
+                        setDeletingId(p.id)
+                        try {
+                          await deleteProject(p.id)
+                          setProjects((prev) => prev.filter((x) => String(x.id) !== String(p.id)))
+                        } catch (err) {
+                          setActionError(err?.message || 'Failed to delete submission.')
+                        } finally {
+                          setDeletingId(null)
+                        }
+                      }}
+                    >
+                      {deletingId === p.id ? 'Deleting...' : 'Delete'}
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
