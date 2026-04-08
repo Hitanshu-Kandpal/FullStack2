@@ -19,7 +19,7 @@ import com.AML2A.Rest_API.service.StudentService;
 
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174", "http://localhost:5177"})
 @RequestMapping("/api/students")
 public class StudentController {
 	
