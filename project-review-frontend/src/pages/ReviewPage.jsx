@@ -25,7 +25,7 @@ export default function ReviewPage() {
   const [readmeLoading, setReadmeLoading] = useState(false)
   const [readmeText, setReadmeText] = useState(null)
 
-  function buildReadmeEmbedUrl(githubLink) {
+  function buildReadmeRawInfo(githubLink) {
     try {
       if (!githubLink) return null
       const u = new URL(githubLink)
@@ -35,6 +35,8 @@ export default function ReviewPage() {
       const owner = parts[0]
       const repo = parts[1]
       if (!owner || !repo) return null
+
+      const rawRepoRootUrl = `https://raw.githubusercontent.com/${owner}/${repo}/`
 
       let branch = 'main'
       const treeIdx = parts.indexOf('tree')
@@ -47,7 +49,9 @@ export default function ReviewPage() {
 
         // If the student links to a folder, we load README.md from that folder.
         const readmePath = submittedPath ? `${submittedPath}/README.md` : 'README.md'
-        return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${readmePath}`
+        const readmeDir = submittedPath ? submittedPath : ''
+        const readmeUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${readmePath}`
+        return { owner, repo, branch, readmePath, readmeDir, rawRepoRootUrl: rawRepoRootUrl + branch + '/', readmeUrl }
       }
 
       if (blobIdx >= 0) {
@@ -57,17 +61,104 @@ export default function ReviewPage() {
 
         // If the link points directly to a README file, use it as-is.
         const blobPath = blobPathParts.join('/')
-        return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${blobPath}`
+        const readmePath = blobPath
+        const readmeDir = blobPath.includes('/') ? blobPath.split('/').slice(0, -1).join('/') : ''
+        const readmeUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${blobPath}`
+        return { owner, repo, branch, readmePath, readmeDir, rawRepoRootUrl: rawRepoRootUrl + branch + '/', readmeUrl }
       }
 
       // Fallback: assume repo root README.
-      return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/README.md`
+      const readmePath = 'README.md'
+      const readmeDir = ''
+      const readmeUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${readmePath}`
+      return { owner, repo, branch, readmePath, readmeDir, rawRepoRootUrl: rawRepoRootUrl + branch + '/', readmeUrl }
     } catch {
       return null
     }
   }
 
-  const readmeEmbedUrl = useMemo(() => buildReadmeEmbedUrl(project?.githubLink), [project?.githubLink])
+  function resolveRepoPath(fromDir, relPath) {
+    if (!relPath) return relPath
+    let src = String(relPath).split('?')[0].trim()
+    if (!src) return src
+
+    // Leave already-resolved URLs as-is.
+    if (src.startsWith('data:')) return src
+
+    // Convert common GitHub "blob" URLs into raw.githubusercontent.com URLs for images.
+    if (src.startsWith('http://') || src.startsWith('https://')) {
+      try {
+        const u = new URL(src)
+        if (u.hostname && u.hostname.toLowerCase() === 'github.com') {
+          const parts = u.pathname.split('/').filter(Boolean)
+          const owner = parts[0]
+          const repo = parts[1]
+          const blobIdx = parts.indexOf('blob')
+          if (owner && repo && blobIdx >= 0 && parts[blobIdx + 1]) {
+            const branch = parts[blobIdx + 1]
+            const filePath = parts.slice(blobIdx + 2).join('/')
+            if (filePath) {
+              return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${filePath}`
+            }
+          }
+        }
+      } catch {
+        // Fall through to returning original src
+      }
+
+      return src
+    }
+
+    // Absolute path in repo (from /...).
+    if (src.startsWith('/')) {
+      src = src.replace(/^\/+/, '')
+      return src
+    }
+
+    // Remove leading "./" but keep "../" intact.
+    src = src.replace(/^\.?\//, '')
+
+    const baseSegments = fromDir ? fromDir.split('/').filter(Boolean) : []
+    const relSegments = src.split('/').filter(Boolean)
+
+    for (const seg of relSegments) {
+      if (seg === '.' || seg === '') continue
+      if (seg === '..') {
+        if (baseSegments.length > 0) baseSegments.pop()
+      } else {
+        baseSegments.push(seg)
+      }
+    }
+
+    return baseSegments.join('/')
+  }
+
+  const readmeRawInfo = useMemo(() => buildReadmeRawInfo(project?.githubLink), [project?.githubLink])
+  const readmeEmbedUrl = readmeRawInfo?.readmeUrl ?? null
+
+  const markdownComponents = useMemo(() => {
+    if (!readmeRawInfo) return {}
+
+    const rawRepoRootUrl = readmeRawInfo.rawRepoRootUrl
+    const readmeDir = readmeRawInfo.readmeDir
+
+    return {
+      img: ({ src, alt }) => {
+        const rewrittenSrc =
+          src && rawRepoRootUrl
+            ? rawRepoRootUrl + resolveRepoPath(readmeDir, src)
+            : src
+
+        return (
+          <img
+            src={rewrittenSrc}
+            alt={alt || ''}
+            style={{ maxWidth: '100%', height: 'auto', borderRadius: 10, display: 'block', margin: '12px 0' }}
+          />
+        )
+      },
+    }
+  }, [readmeRawInfo])
 
   useEffect(() => {
     let cancelled = false
@@ -219,13 +310,10 @@ export default function ReviewPage() {
             <div className="label">README</div>
             {project.readmeContent && String(project.readmeContent).trim() ? (
               <div className="readme">
-                <ReactMarkdown>{project.readmeContent}</ReactMarkdown>
+                <ReactMarkdown components={markdownComponents}>{project.readmeContent}</ReactMarkdown>
               </div>
             ) : (
               <div className="readme" style={{ padding: 14 }}>
-                <div style={{ marginBottom: 10, color: '#6b7280' }}>
-                  README not available from backend fetch.
-                </div>
                 <button
                   type="button"
                   className="button primary"
@@ -241,7 +329,7 @@ export default function ReviewPage() {
                         <div className="loading">Loading README...</div>
                       ) : readmeText && readmeText.trim() ? (
                         <div className="readme" style={{ marginTop: 10 }}>
-                          <ReactMarkdown>{readmeText}</ReactMarkdown>
+                          <ReactMarkdown components={markdownComponents}>{readmeText}</ReactMarkdown>
                         </div>
                       ) : (
                         <div className="loading" style={{ paddingTop: 10 }}>
